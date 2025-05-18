@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電影院管理界面</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            font-size: 18px;
+            /* 設定全局字體大小 */
+        }
+
+        .header {
+            /* 背景 */
+            background-color: rgb(223, 107, 29);
+            height: 60px;
+            width: 100%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            /*字體顏色*/
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 0 20px;
+        }
+
+        .header .title {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .title button {
+            margin-left: 10px;
+            /* Adjust space between title and button */
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+
+        .block {
+            /*four functions design*/
+            flex: 1 0 50%;
+            /* Allows the blocks to take up 50% of the container's width */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #d87c0b;
+            color: white;
+            /*字體顏色*/
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            /*粗體*/
+            transition: background-color 0.3s;
+            border: none;
+            /* 移除邊界 */
+            user-select: none;
+            height: calc(50vh - 30px);
+            /* Adjust height to fit within the viewport */
+        }
+
+        .block:hover {
+            background-color: #bf6b0a;
+        }
+
+        .block:active {
+            background-color: #a85a08;
+        }
+
+        .settin_big,
+        .settin_small {
+            /*setting bottom*/
+            background-color: transparent;
+            /*透明*/
+            border: none;
+            cursor: pointer;
+            border-radius: 2px 2px;
+            font-size: 0.5em;
+            transition: background-color 0.3s;
+        }
+
+        .settin_big:hover,
+        .settin_small:hover {
+            background-color: #cfcd4c;
+            color: rgb(250, 250, 250);
+        }
+
+        .cirs {
+            box-sizing: border-box;
+            width: 70px;
+            height: 40px;
+            padding: 2px;
+            border-radius: 20px;
+            background-color: #eee;
+            border: 2px solid #ccc;
+            position: absolute;
+            /* Positioning the switch button absolutely */
+            top: 10px;
+            /* Distance from the top of the window */
+            right: 10px;
+            /* Distance from the right of the window */
+        }
+
+        .circle {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            background-color: #aaa;
+            border-radius: 50%;
+            margin-left: 0;
+            cursor: pointer;
+        }
+
+        .is-active.cirs {
+            background-color: Honeydew;
+            border-color: rgb(228, 210, 45);
+        }
+
+        .is-active .circle {
+            background-color: rgb(228, 210, 45);
+            margin-left: calc(100% - 32px);
+        }
+
+        .is-active.cirs,
+        .is-active .circle {
+            transition: all .3s;
+        }
+
+        #busyButton.busy {
+            background-color: red;
+        }
+
+        #busyButton {
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        #busyButton:hover {
+            background-color: darkgreen;
+        }
+
+        #busyButton.busy:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="title">
+            電影院控制台
+            <button id="busyButton">閒置中</button>
+            <button class="settin_big" onclick="changeFontSize('big')"><img width="35" height="35"
+                    src="./image/a.png" /></button>
+            <button class="settin_small" onclick="changeFontSize('small')"><img width="30" height="30"
+                    src="./image/a.png" /></button>
+        </div>
+        <div id="cirs" class="cirs"> <!--編輯on&off-->
+            <div class="circle" onclick="toggle()"></div>
+        </div>
+    </div>
+    <div class="container" id="container">
+        <div class="block" draggable="false" id="block1" onclick="location.href='./movie_set.html'">電影更新</div>
+        <div class="block" draggable="false" id="block2" onclick="location.href='detail.php'">訂單處理</div>
+        <div class="block" draggable="false" id="block3" onclick="location.href='customer.php'">座位管理</div>
+        <div class="block" draggable="false" id="block4" onclick="location.href='incoming.php'">新增場次</div>
+    </div>
+
+
+    <script>
+        function toggle() {
+            document.getElementById('cirs').classList.toggle('is-active');
+            toggleEditMode();
+        }
+
+        function changeFontSize(action) {
+            let currentSize = parseFloat(getComputedStyle(document.body).fontSize);
+            if (action === 'big') {
+                currentSize += 2;
+            } else if (action === 'small') {
+                currentSize -= 2;
+            }
+            document.body.style.fontSize = currentSize + 'px';
+        }
+
+        function toggleEditMode() {
+            const container = document.getElementById('container');
+            const blocks = container.getElementsByClassName('block');
+            const isEditing = document.getElementById('cirs').classList.contains('is-active');
+
+            Array.from(blocks).forEach(block => {
+                block.draggable = isEditing;
+                block.style.cursor = isEditing ? 'move' : 'pointer';
+                block.onclick = isEditing ? null : () => location.href = block.getAttribute('data-href');
+            });
+
+            if (isEditing) {
+                container.ondragstart = (e) => {
+                    e.dataTransfer.setData("text/plain", e.target.id);
+                };
+
+                container.ondragover = (e) => {
+                    e.preventDefault();
+                };
+
+                container.ondrop = (e) => {
+                    e.preventDefault();
+                    const draggedId = e.dataTransfer.getData("text/plain");
+                    const draggedElement = document.getElementById(draggedId);
+                    const dropTarget = e.target;
+
+                    if (dropTarget.classList.contains('block') && dropTarget.id !== draggedId) {
+                        const allBlocks = Array.from(container.children);
+                        const draggedIndex = allBlocks.indexOf(draggedElement);
+                        const dropIndex = allBlocks.indexOf(dropTarget);
+
+                        if (draggedIndex > dropIndex) {
+                            container.insertBefore(draggedElement, dropTarget);
+                        } else {
+                            container.insertBefore(draggedElement, dropTarget.nextSibling);
+                        }
+                    }
+                };
+            } else {
+                container.ondragstart = null;
+                container.ondragover = null;
+                container.ondrop = null;
+            }
+        }
+
+        document.querySelectorAll('.block').forEach(block => {
+            block.setAttribute('data-href', block.getAttribute('onclick').replace('location.href=', '').replace(/'/g, ''));
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var busyButton = document.getElementById('busyButton');
+            busyButton.addEventListener('click', function () {
+                if (busyButton.classList.toggle('busy')) {
+                    busyButton.textContent = '忙碌中';
+                    updateDatabase('1');
+                } else {
+                    busyButton.textContent = '閒置中';
+                    updateDatabase('0');
+                }
+            });
+
+            function updateDatabase(status) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'updateStatus.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log('Database updated successfully');
+                    }
+                };
+                xhr.send(JSON.stringify({ status: status }));
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增電影</title>
+</head>
+<body>
+    <?php
+    if (isset($_POST["MName"]) && !empty($_POST["MName"])) {
+        $servername = "localhost";
+        $username = "root";
+        $password = "1114576";
+        $dbname = "final";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        $name = $_POST["MName"];
+        $release_date = $_POST["release_date"];
+        $introduction = $_POST["introduction"];
+        $duration = $_POST["duration"];
+        $rated = $_POST["rated"];
+        $image = $_FILES["image"]["name"];
+        $target_dir = "image/";
+        $target_file = $target_dir . basename($image);
+
+        if ($conn->connect_error) {
+            die("連接失敗：" . $conn->connect_error);
+        }
+
+        // 檢查並創建目標目錄
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
+
+        // 移動上傳的文件到指定目錄
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            $sql = "INSERT INTO movie (Name, release_date, introduction, duration, rated, image)
+            VALUES ('$name', '$release_date', '$introduction', '$duration', '$rated', '$target_file')";
+
+            if ($conn->query($sql)) {
+                echo "新記錄插入成功";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        } else {
+            echo "上傳圖片失敗。";
+        }
+
+        $conn->close();
+    }
+    ?>
+    <form action="./movies_add.php" method="post" enctype="multipart/form-data">
+        新增電影名稱：<input type="text" name="MName" id="">
+        <br>
+        電影上映日期：<input type="datetime-local" name="release_date" id="">
+        <br>
+        電影片長：<input type="number" name="duration" id="">
+        <br>
+        電影分級：
+        <select name="rated">
+            <option value="限制級">限制級</option>
+            <option value="輔導級">輔導級</option>
+            <option value="保護級">保護級</option>
+            <option value="普遍級">普遍級</option>
+        </select>
+        <br>
+        電影簡介：<textarea name="introduction" id=""></textarea>
+        <br>
+        上傳圖片：<input type="file" name="image" id="">
+        <br>
+        <button type="submit">確認</button>
+    </form>
+</body>
+</html>

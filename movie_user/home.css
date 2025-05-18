@@ -1,0 +1,102 @@
+/* home.css */
+
+/* 重置一些預設樣式 */
+body, h1, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* 頭部樣式 */
+header {
+    background: #4b0082; /* 深紫色 */
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* 導航樣式 */
+nav {
+    background: #6a0dad; /* 較淺的紫色 */
+    color: #fff;
+    padding: 0.5rem 0;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* 主要內容樣式 */
+.hot-sale {
+    background: #9370db; /* 另一個紫色 */
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+.hot-sale a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hot-sale a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.container img {
+    margin: 1rem;
+    width: 250px; /* 調整圖片寬度 */
+    height: 375px; /* 調整圖片高度 */
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.container img:hover {
+    transform: scale(1.05);
+}
+
+/* 頁腳樣式 */
+footer {
+    background: #4b0082; /* 與頭部相同的深紫色 */
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+

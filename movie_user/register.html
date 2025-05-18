@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-TW" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>會員註冊</title>
+  <link rel="icon" href="asset/register.png">
+  <link rel="stylesheet" href="css/register.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="TitleBlock">
+      <span id="regText">註冊</span>
+    </div>
+    <form action="./register.php" method="get">
+      <div class="InputBlock">
+        <table class="userWrite">
+          <tr>
+            <td><span class="inputDescription">姓名</span></td>
+            <td><input type="text" name="name_input" class="input" placeholder="請輸入真實姓名"></td>
+          </tr>
+          <tr>
+            <td><span class="inputDescription">身分證字號&emsp;</span></td>
+            <td>
+              <select class="select" name="id_select">
+                <option value="?" disabled selected>*</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+                <option value="H">H</option>
+                <option value="I">I</option>
+                <option value="J">J</option>
+                <option value="K">K</option>
+                <option value="L">L</option>
+                <option value="M">M</option>
+                <option value="N">N</option>
+                <option value="O">O</option>
+                <option value="P">P</option>
+                <option value="Q">Q</option>
+                <option value="R">R</option>
+                <option value="S">S</option>
+                <option value="T">T</option>
+                <option value="U">U</option>
+                <option value="V">V</option>
+                <option value="W">V</option>
+                <option value="X">X</option>
+                <option value="Y">Y</option>
+                <option value="Z">Z</option>
+              </select>
+              <input type="text" name="id_input" class="input" size="14" maxlength="9" placeholder="身分證字號後9碼">
+            </td>
+          </tr>
+          <tr>
+            <td><span class="inputDescription">行動電話</span></td>
+            <td><input type="text" name="phoneNumber_input" class="input" maxlength="10" value="09"></td>
+          </tr>
+          <tr>
+            <td><span class="inputDescription">E-mail</span></td>
+            <td><input type="text" name="eMail_input" class="input" size="30" placeholder="請輸入您的E-mail"></td>
+          </tr>
+          <tr>
+            <td><span class="inputDescription">輸入密碼</span></td>
+            <td><input type="password" name="psw_input" class="input" size="30" placeholder="請注意英文大小寫"></td>
+          </tr>
+          <tr>
+            <td><span class="inputDescription">認證密碼</span></td>
+            <td><input type="password" name="pswcheck_input" class="input" size="30" placeholder="請再輸入一次密碼"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="ButtonBlock">
+        <button type="submit" name="register_button" id="submit_button" class="button" title="送出資料並註冊">註冊</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

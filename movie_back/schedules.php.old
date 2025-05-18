@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>schedules</title>
+    <script>
+        function validateDateFormat(input) {
+            const datePattern = /^\d{2}-\d{2}$/; 
+            if (!datePattern.test(input.value)) {
+                alert('日期格式不正確，請使用MM-DD格式');
+                input.value = '';
+                input.focus();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <?php
+    $host = 'localhost';
+    $db = 'final';
+    $user = 's1114580';
+    $pass = '1114580';
+
+    // 建立連接
+    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["theater"]) && isset($_GET["date"]) && isset($_GET["time"]) && isset($_GET["MName"])) {
+        $theater = $_GET["theater"];
+        $date = $_GET["date"];
+        $time = $_GET["time"];
+        $MName = $_GET["MName"];
+
+        // 準備SQL語句
+        $sql = "INSERT INTO schedules (room, date, time, name) VALUES (:theater, :date, :time, :movie_name)";
+        $stmt = $pdo->prepare($sql);
+
+        // 執行SQL語句
+        if ($stmt->execute([':theater' => $theater, ':date' => $date, ':time' => $time, ':movie_name' => $MName])) {
+            echo "新增場次成功！";
+        } else {
+            echo "新增場次失敗。";
+        }
+    }
+    ?>
+    <form action="./schedules.php" method="get">
+        <br>
+        影廳
+        <label>
+            <input type="radio" name="theater" value="鑽石廳"> 鑽石廳
+        </label>
+
+        <label>
+            <input type="radio" name="theater" value="黃金廳"> 黃金廳
+        </label>
+        <br>
+        日期（格式：MM-DD）
+        <input type="text" name="date" id="" required onblur="validateDateFormat(this)">
+        <br>
+        時間
+        <input type="time" name="time" id="">
+        <br>
+        電影選擇
+
+        <select name="MName" id="MName" required>
+            <?php
+            // 執行SQL查詢
+            $sql = 'SELECT name FROM movie';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+
+            // 獲取查詢結果
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($results as $row): ?>
+                <option value="<?= $row['name']; ?>"><?= $row['name']; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <br>
+        <button type="submit">新增場次</button>
+    </form>
+</body>
+
+</html>

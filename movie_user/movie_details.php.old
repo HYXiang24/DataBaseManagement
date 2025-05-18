@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瞭解更多</title>
+</head>
+<body>
+<div class="container">
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "1114576";
+$dbname = "final";
+
+$name = $_GET["name"];
+
+$pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+
+$sql = "SELECT * FROM movie WHERE Name = '$name'";
+$stmt = $pdo->query($sql);
+
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+    echo "<div class='movie-card'>";
+    echo "<h2>" . $row['Name'] . "</h2>";
+    echo "<img src=../movie_back/" . $row['image'] . " alt='電影海報'>";
+    echo "<p><strong>評價:</strong> " . $row['movie_rating'] . "</p>";
+    echo "<p><strong>分級:</strong> " . $row['rated'] . "</p>";
+    echo "<p><strong>時長:</strong> " . $row['duration'] . "分鐘" . "</p>";
+    echo "<p><strong>上映日期:</strong> " . $row['release_date'] . "</p>";
+    echo "<p><strong>電影介紹:</strong> " . $row['introduction'] . "</p>";
+    //echo "<p><strong>簡介:</strong> " . $row['introduction'] . "</p>";
+    echo "<form action='./comment.php' method='GET'>";
+    echo "<input type='hidden' name='name' value='" . $row['Name'] . "'>";
+    echo "<button type='submit' name='button3'>查看評論</button>";
+    echo "</form>";
+    echo "</div>";
+?>
+</div>
+</body>
+</html>

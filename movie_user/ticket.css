@@ -1,0 +1,148 @@
+/* 設置整體頁面 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+header {
+    background-color: #2220a1; /* 藍色背景 */
+    color: #ffffff; /* 白色文字 */
+    padding: 20px;
+}
+
+h1 {
+    margin: 0; /* 清除預設 margin */
+}
+
+
+/* 電影卡片設置 */
+.movie-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+}
+
+/* 電影海報設置 */
+.movie-poster {
+    border-radius: 5px;
+    margin-right: 50px;
+    width: 400px; /* 最大寬度 */
+    height: 550px;
+}
+
+/* 電影資訊設置 */
+.movie-info {
+    width: 60%;
+}
+
+/* 電影標題設置 */
+.movie-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* 電影描述設置 */
+.movie-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* 日期選擇區域設置 */
+.date-selection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* 按鈕設置 */
+.date-selection button {
+    background-color: #ffffff;
+    border: 2px solid rgb(0, 0, 0); /* 添加外框線 */
+    color: rgb(26, 9, 9);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 按鈕 hover 效果設置 */
+.date-selection button:hover {
+    background-color: #a5dbfc;
+}
+
+/* 時段選擇區域設置 */
+.showtimes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-direction: column; /* 將元素以垂直方向排列 */
+}
+
+
+/* 時段按鈕設置 */
+.showtime-buttons button {
+    background-color: #ffffff;
+    border: 2px solid rgb(0, 0, 0); /* 添加外框線 */
+    color: rgb(26, 9, 9);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 30px; /* 右方留出間距 */
+}
+
+/* 時段按鈕 hover 效果設置 */
+.showtime-buttons button:hover {
+    background-color: #a5dbfc;
+}
+
+/* 票種CSS */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.row {
+    display: flex;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.cell {
+    flex: 1;
+    padding: 8px;
+}
+
+.price, .quantity, .subtotal {
+    text-align: right;
+}
+
+.info {
+    color: #6c757d;
+    font-size: 12px;
+}
+.price {
+    color: #ff0000;
+}
+.quantity {
+    width: 60px;
+}
+.total {
+    font-weight: bold;
+}
+
+.floating-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+
+
