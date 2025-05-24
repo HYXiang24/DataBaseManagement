@@ -10,21 +10,21 @@
 ## 專案結構
 
 - `movie_back`：管理端  
-  初始網頁：`/main.html`
-  
+  初始網頁：`/main.html`  
+  電影更新：`movies_add.php` `movie_rm.php` `edit_movie_list.php`  
+  訂單查詢：`order.php`  
+  票種管理：`ticket_add.php` `ticket_rm.php` `ticket_edit.php`  
+  新增場次：`schedules.php`
 
 - `movie_user`：使用者端  
-  初始網頁：`/home.html`
-  登入驗證：`/Login.php`
-  電影資訊：`/movies-information.php`
-  選擇時段、票種：`/test1.php`
-  劃位：`/choose.php`
-  訂單明細：`/detail.php`
-  電影詳細資訊：`/movie_details.php`
-  評論：`/comment.php`
-  
-  
-
+  初始網頁：`/home.html`  
+  登入驗證：`/Login.php`  
+  電影資訊：`/movies-information.php`  
+  選擇時段、票種：`/test1.php`  
+  劃位：`/choose.php`  
+  訂單明細：`/detail.php`  
+  電影詳細資訊：`/movie_details.php`  
+  評論：`/comment.php`  
   
 ---
 
