@@ -9,12 +9,23 @@
 
 ## 專案結構
 
-- `movie_back`：管理端介面  
-  初始網頁為：`/movie_back/main.html`
+- `movie_back`：管理端  
+  初始網頁：`/main.html`
+  
 
-- `movie_user`：使用者端介面  
-  初始網頁為：`/movie_user/home.html`
+- `movie_user`：使用者端  
+  初始網頁：`/home.html`
+  登入驗證：`/Login.php`
+  電影資訊：`/movies-information.php`
+  選擇時段、票種：`/test1.php`
+  劃位：`/choose.php`
+  訂單明細：`/detail.php`
+  電影詳細資訊：`/movie_details.php`
+  評論：`/comment.php`
+  
+  
 
+  
 ---
 
 ## 執行方式
